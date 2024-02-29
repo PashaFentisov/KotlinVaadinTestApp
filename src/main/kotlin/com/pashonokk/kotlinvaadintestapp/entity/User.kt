@@ -14,4 +14,6 @@ class User(
     var email: String,
     var password: String
 ) {
+
+    constructor(name: String, email: String, password: String): this(0, name, email, password)
 }

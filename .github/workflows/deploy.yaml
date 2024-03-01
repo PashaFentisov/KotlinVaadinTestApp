@@ -1,0 +1,45 @@
+name: Deploy to Server
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Remove old host key
+        run: |
+          ssh-keygen -f "/home/runner/.ssh/known_hosts" -R "159.65.57.20"
+
+      - name: Setup known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+
+#      - name: Deploy to Server
+#        run: |
+#          ssh ${{ secrets.NAME }}@${{ secrets.HOST }}
+#          "cd ~/proj-dir/KotlinVaadinTestApp && git pull origin master &&
+#          mvn clean package && java -jar target/KotlinVaadinTestApp-0.0.1-SNAPSHOT.jar"
+
+      - name: Deploy to Server
+        env:
+          SPRING_DATASOURCE_USERNAME: ${{ secrets.SPRING_DATASOURCE_USERNAME }}
+          SPRING_DATASOURCE_PASSWORD: ${{ secrets.SPRING_DATASOURCE_PASSWORD }}
+          SPRING_DATASOURCE_URL: ${{ secrets.SPRING_DATASOURCE_URL }}
+        run: |
+          ssh ${{ secrets.NAME }}@${{ secrets.HOST }} 
+          "cd ~/proj-dir/KotlinVaadinTestApp && git pull origin master && 
+          mvn clean package && java -jar target/KotlinVaadinTestApp-0.0.1-SNAPSHOT.jar"
+          
+     
+

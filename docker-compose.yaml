@@ -30,6 +30,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql-container:3306/vaadin
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
+      SPRING_FLYWAY_BASELINE_ON_MIGRATE: true
 
 volumes:
   mysql_data:

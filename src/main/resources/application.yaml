@@ -3,8 +3,8 @@ spring:
     baseline-on-migrate: true
   datasource:
     username: doadmin
-    password: ${SPRING_DATASOURCE_PASSWORD:root}
-    url: ${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3306/vaadin}
+    password: AVNS_YLRSs3s35Z1pGL1HWIC
+    url: jdbc:mysql://db-mysql-lon1-21527-do-user-15948779-0.c.db.ondigitalocean.com:25060/defaultdb
 
   jpa:
     hibernate:

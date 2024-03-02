@@ -17,7 +17,6 @@ class KotlinVaadinTestAppApplication : AppShellConfigurator {
             print("Hello")
             var runApplication = runApplication<KotlinVaadinTestAppApplication>(*args)
             runApplication.getBean(DatabaseCredentials::class.java).printCredentials()
-
         }
 
         @Bean

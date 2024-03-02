@@ -19,6 +19,11 @@ class UserRestController(private val userService: UserService) {
         return ResponseEntity.ok(userService.findAllUsers())
     }
 
+    @GetMapping("/test")
+    fun test(): ResponseEntity<String>{
+        return ResponseEntity.ok("Test")
+    }
+
     @PostMapping
     fun createUser(@RequestBody userSavingDto: UserSavingDto): ResponseEntity<User>{
         return ResponseEntity.ok(userService.createUser(userSavingDto))

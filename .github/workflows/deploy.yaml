@@ -25,9 +25,9 @@ jobs:
           mkdir -p ~/.ssh
           ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
 
-      # - name: Stop Running Application
-      #   run: |
-      #      ssh ${{ secrets.NAME }}@${{ secrets.HOST }} "pkill -f KotlinVaadinTestApp-0.0.1-SNAPSHOT.jar || true"
+      - name: Stop Running Application
+        run: |
+           ssh ${{ secrets.NAME }}@${{ secrets.HOST }} "pkill -f KotlinVaadinTestApp-0.0.1-SNAPSHOT.jar || true"
 
       - name: Prepare and Build
         env:

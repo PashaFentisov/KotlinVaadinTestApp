@@ -14,6 +14,7 @@ class KotlinVaadinTestAppApplication : AppShellConfigurator {
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
+            print("Hello")
             var runApplication = runApplication<KotlinVaadinTestAppApplication>(*args)
             runApplication.getBean(DatabaseCredentials::class.java).printCredentials()
 

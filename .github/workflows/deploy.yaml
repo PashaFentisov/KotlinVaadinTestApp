@@ -39,21 +39,17 @@ jobs:
 
       - name: Run Application
         env:
-          SPRING_DATASOURCE_USERNAME: ${{ secrets.SPRING_DATASOURCE_USERNAME }}
-          SPRING_DATASOURCE_PASSWORD: ${{ secrets.SPRING_DATASOURCE_PASSWORD }}
-          SPRING_DATASOURCE_URL: ${{ secrets.SPRING_DATASOURCE_URL }}
-        run: |
-          ssh ${{ secrets.NAME }}@${{ secrets.HOST }} "java -jar ~/proj-dir/KotlinVaadinTestApp/target/KotlinVaadinTestApp-0.0.1-SNAPSHOT.jar"
-
-#      - name: Deploy to Server
-#        env:
 #          SPRING_DATASOURCE_USERNAME: ${{ secrets.SPRING_DATASOURCE_USERNAME }}
 #          SPRING_DATASOURCE_PASSWORD: ${{ secrets.SPRING_DATASOURCE_PASSWORD }}
 #          SPRING_DATASOURCE_URL: ${{ secrets.SPRING_DATASOURCE_URL }}
+        run: |
+#          ssh ${{ secrets.NAME }}@${{ secrets.HOST }} "nohup java -jar ~/proj-dir/KotlinVaadinTestApp/target/KotlinVaadinTestApp-0.0.1-SNAPSHOT.jar &"
+          ssh ${{ secrets.NAME }}@${{ secrets.HOST }} "nohup java -Dspring.datasource.username=${{ secrets.SPRING_DATASOURCE_USERNAME }} -Dspring.datasource.password=${{ secrets.SPRING_DATASOURCE_PASSWORD }} -Dspring.datasource.url=${{ secrets.SPRING_DATASOURCE_URL }} -jar ~/proj-dir/KotlinVaadinTestApp/target/KotlinVaadinTestApp-0.0.1-SNAPSHOT.jar &"
+#      - name: Check Application
 #        run: |
-#          ssh ${{ secrets.NAME }}@${{ secrets.HOST }}
-#          "cd ~/proj-dir/KotlinVaadinTestApp && git pull origin master &&
-#          mvn clean package -DskipTests && java -jar target/KotlinVaadinTestApp-0.0.1-SNAPSHOT.jar"
+#          sleep 60 # Wait for the application to start
+#          curl -f http://${{ secrets.SSH_PRIVATE_KEY }}:8080/ || exit 1
+
           
      
 

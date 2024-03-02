@@ -38,7 +38,7 @@ jobs:
           ssh ${{ secrets.NAME }}@${{ secrets.HOST }} "cd ~/proj-dir/KotlinVaadinTestApp && git pull origin master && mvn clean package -DskipTests"
 
       - name: Run Application
-        env:
+#        env:
 #          SPRING_DATASOURCE_USERNAME: ${{ secrets.SPRING_DATASOURCE_USERNAME }}
 #          SPRING_DATASOURCE_PASSWORD: ${{ secrets.SPRING_DATASOURCE_PASSWORD }}
 #          SPRING_DATASOURCE_URL: ${{ secrets.SPRING_DATASOURCE_URL }}
